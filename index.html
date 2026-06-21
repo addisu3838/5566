@@ -82,7 +82,7 @@
       opacity: 0.5;
     }
     .stat-label {
-      font-size: 11px;
+      font-size: 16px;
       font-weight: 600;
       letter-spacing: 1.2px;
       text-transform: uppercase;
@@ -94,7 +94,7 @@
       gap: 6px;
     }
     .stat-val {
-      font-size: 28px;
+      font-size: 20px;
       font-weight: 700;
       letter-spacing: -0.4px;
       font-variant-numeric: tabular-nums;
@@ -713,8 +713,8 @@
   <!-- FULLSCREEN SPLASH - SINGLE PHOTO -->
   <div id="splashSlideshow">
     <img id="splashImg" src="index.png" alt="Chacha Dam">
-    <div class="splash-caption" id="splashCaption">🌊 Chacha Dam</div>
-    <div class="splash-timer" id="splashTimer">2s</div>
+    <div class="splash-caption" id="splashCaption"></div>
+    <div class="splash-timer" id="splashTimer"> </div>
   </div>
 
 <div class="wrap">
@@ -722,7 +722,7 @@
   <div id="incomeSummaryRow">
     <div class="summary-row">
       <div class="stat-card" id="incomeSummaryCard">
-        <div class="stat-label">📈 ጠቅላላ ገቢ</div>
+        <div class="stat-label">📈 Total Income</div>
         <div class="stat-val green" id="totalIncomeDisplay">0 ETB</div>
       </div>
     </div>
@@ -876,7 +876,7 @@
     </button>
     <button class="tab-btn" id="nav-percent" onclick="switchTab('percent')">
       <span class="tab-icon">%</span>
-      <span class="tab-label">Percent</span>
+      <span class="tab-label">Percentag</span>
     </button>
     <button class="tab-btn" id="nav-photos" onclick="switchTab('photos')">
       <span class="tab-icon">📸</span>
@@ -1317,7 +1317,7 @@
   // 📸 ፎቶዎች
   // ============================================================
   const projectPhotos = [
-    { url: "index.png", caption: "Main dam overview" },
+    { url: "capture.png", caption: "Main dam overview" },
     { url: "index2.jpg", caption: "Spillway construction" },
     { url: "index3.jpg", caption: "Site excavation" },
     { url: "index4.jpg", caption: "Valve house progress" }
@@ -1334,7 +1334,7 @@
     if (img && cap) {
       img.src = projectPhotos[0].url;
       cap.textContent = projectPhotos[0].caption;
-      img.onerror = () => { img.src = 'https://placehold.co/400x200?text=No+Image'; };
+      img.onerror = () => { img.src = 'capture.png'; };
     }
     currentSlideIndex = 0;
     slideshowInterval = setInterval(() => {
@@ -1346,7 +1346,7 @@
         setTimeout(() => {
           img.src = projectPhotos[currentSlideIndex].url;
           cap.textContent = projectPhotos[currentSlideIndex].caption;
-          img.onerror = () => { img.src = 'https://placehold.co/400x200?text=No+Image'; };
+          img.onerror = () => { img.src = 'capture.png'; };
           img.style.opacity = '1';
         }, 200);
       }
@@ -1425,8 +1425,8 @@
     const splashTimer = document.getElementById('splashTimer');
     if (!splash || !splashImg || !splashCap || !splashTimer) return;
     
-    splashImg.src = "index.png";
-    splashCap.textContent = "🌊 Chacha Dam";
+    splashImg.src = "capture.png";
+    //splashCap.textContent = "🌊 Chacha Dam";//
     splashTimer.textContent = '2s';
     splashImg.onerror = () => { splashImg.src = 'https://placehold.co/800x600?text=Chacha+Dam'; };
 
