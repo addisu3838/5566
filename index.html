@@ -63,6 +63,21 @@
       gap: 10px;
       padding: 18px 16px 10px;
     }
+    .summary-row.two-col {
+      grid-template-columns: 1fr 1fr;
+    }
+    .summary-row.two-col .stat-card {
+      padding: 18px 10px;
+    }
+    .summary-row.two-col .stat-label {
+      font-size: 13px;
+      letter-spacing: 0.4px;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+    .summary-row.two-col .stat-val {
+      font-size: 15px;
+    }
     .stat-card {
       background: linear-gradient(155deg, #1f2330 0%, #15171f 100%);
       border-radius: var(--border-radius-lg);
@@ -161,6 +176,38 @@
     .tab-panel { display: none; }
     .tab-panel.active { display: block; animation: fadeIn 0.25s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(4px);} to { opacity: 1; transform: translateY(0);} }
+
+    /* ===== Income Sub Tabs (Site Work / Contract) ===== */
+    .income-subtabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 4px 16px 16px;
+    }
+    .income-subtab-btn {
+      flex: 0 1 auto;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1px;
+      border: 1px solid var(--border-subtle);
+      background: var(--tg-card-bg);
+      color: var(--tg-hint);
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(.4,0,.2,1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    .income-subtab-btn .subtab-icon { font-size: 13px; }
+    .income-subtab-btn.active {
+      background: var(--gold-soft);
+      border-color: var(--gold-border);
+      color: var(--gold);
+      box-shadow: 0 4px 14px rgba(201,163,94,0.12);
+    }
 
     /* ===== Bill Cards (Income) ===== */
     .bill-card {
@@ -723,15 +770,23 @@
 <div class="wrap">
   <!-- Income Summary - Only visible in Income Tab -->
   <div id="incomeSummaryRow">
-    <div class="summary-row">
-      <div class="stat-card" id="incomeSummaryCard">
-        <div class="stat-label">📈 Total Income</div>
-        <div class="stat-val green" id="totalIncomeDisplay">0 ETB</div>
+    <div class="summary-row two-col">
+      <div class="stat-card" id="siteWorkSummaryCard">
+        <div class="stat-label">🏗️ Site Work</div>
+        <div class="stat-val green" id="siteWorkIncomeDisplay">0 ETB</div>
+      </div>
+      <div class="stat-card" id="contractSummaryCard">
+        <div class="stat-label">📑 Contract</div>
+        <div class="stat-val green" id="contractIncomeDisplay">0 ETB</div>
       </div>
     </div>
   </div>
 
   <div id="panel-income" class="tab-panel active">
+    <div class="income-subtabs" id="incomeSubtabs">
+      <button class="income-subtab-btn active" id="subtab-site" onclick="switchIncomeSubTab('site')"><span class="subtab-icon">🏗️</span> Site Work</button>
+      <button class="income-subtab-btn" id="subtab-contract" onclick="switchIncomeSubTab('contract')"><span class="subtab-icon">📑</span> Contract</button>
+    </div>
     <div style="padding: 6px 16px 12px;">
       <div id="billsContainer"></div>
     </div>
@@ -1009,15 +1064,40 @@
   const overheadItems = [{ name: 'Overhead 20%', amount: 34454047.00 }];
   const totalCostValue = 404850157.00;
 
+  // ========== Income Sub-Tabs: Site Work / Contract ==========
+  // Bill IDs listed here render under "Contract"; all other bills render under "Site Work"
+  const CONTRACT_BILL_IDS = ['A', 'G'];
+  let incomeSubTab = 'site'; // 'site' | 'contract'
+
+  function switchIncomeSubTab(tab) {
+    incomeSubTab = tab;
+    const siteBtn = document.getElementById('subtab-site');
+    const contractBtn = document.getElementById('subtab-contract');
+    if (siteBtn) siteBtn.classList.toggle('active', tab === 'site');
+    if (contractBtn) contractBtn.classList.toggle('active', tab === 'contract');
+    renderIncomePanel();
+  }
+
   function fmt(v) { return v == null ? '—' : v.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
   function fmtA(v) { let n = parseFloat(v); return isNaN(n) ? v : (n % 1 === 0 ? n.toString() : n.toFixed(2)); }
   function fmtM(v) { let n = parseFloat(v); if (n >= 1e6) return (n/1e6).toFixed(1) + 'M'; if (n >= 1e3) return (n/1e3).toFixed(0) + 'K'; return n.toFixed(0); }
 
   let totalIncome = 0;
-  bills.forEach(b => b.items.forEach(i => { if (i.inc) totalIncome += i.inc; }));
+  let siteWorkIncome = 0;
+  let contractIncome = 0;
+  bills.forEach(b => {
+    let billTotal = 0;
+    b.items.forEach(i => { if (i.inc) billTotal += i.inc; });
+    totalIncome += billTotal;
+    if (CONTRACT_BILL_IDS.includes(b.id)) contractIncome += billTotal;
+    else siteWorkIncome += billTotal;
+  });
 
   function updateSummaryDisplay() {
-    document.getElementById('totalIncomeDisplay').textContent = fmt(totalIncome) + ' ETB';
+    const siteEl = document.getElementById('siteWorkIncomeDisplay');
+    const contractEl = document.getElementById('contractIncomeDisplay');
+    if (siteEl) siteEl.textContent = fmt(siteWorkIncome) + ' ETB';
+    if (contractEl) contractEl.textContent = fmt(contractIncome) + ' ETB';
   }
 
   // ============================================================
@@ -1160,6 +1240,7 @@
     
     setTimeout(() => {
       const botMsg = getBotReply(message);
+      if (!botMsg) return;
       const botDiv = document.createElement('div');
       botDiv.className = 'chat-message chat-message-bot';
       botDiv.textContent = botMsg;
@@ -1216,7 +1297,7 @@
     if(lower.includes('hello') || lower.includes('hi') || lower.includes('ሰላም')) {
       return "👋 ሰላም! እንዴት ልረዳዎ እችላለሁ? ስለ ፕሮጀክቱ ገቢ፣ ወጪ፣ መቶኛ፣ ፎቶዎች ወይም አድራሻ መረጃ መስጠት እችላለሁ።";
     }
-    return "✅ ሰላም! ስለ ፕሮጀክቱ ገቢ፣ ወጪ፣ መቶኛ፣ ፎቶዎች ወይም አድራሻ መረጃ መስጠት እችላለሁ። ምን ማወቅ ይፈልጋሉ?";
+    return '';
   }
 
   // ============================================================
@@ -1226,7 +1307,12 @@
     const container = document.getElementById('billsContainer');
     if(!container) return;
     container.innerHTML = '';
-    bills.forEach((bill, idx) => {
+    const filteredBills = bills.filter(b => CONTRACT_BILL_IDS.includes(b.id) === (incomeSubTab === 'contract'));
+    if (filteredBills.length === 0) {
+      container.innerHTML = '<div style="text-align:center; padding: 30px 10px; color: var(--tg-hint); font-size: 13px;">No bills in this section yet.</div>';
+      return;
+    }
+    filteredBills.forEach((bill, idx) => {
       let billTotal = 0;
       bill.items.forEach(it => { if (it.inc) billTotal += it.inc; });
       const card = document.createElement('div'); card.className = 'bill-card';
@@ -1308,10 +1394,7 @@
     if (!wrapper) return;
     wrapper.innerHTML = `
       <div class="chat-container">
-        <div class="chat-messages" id="chatMessages">
-          <div class="chat-message chat-message-bot">💬 Welcome! 👋 Ask me about Chacha Dam (income, cost, %, schedule, contacts).</div>
-          <div class="chat-message chat-message-system">📌 መልእክቶች ወደ ቴሌግራም ቦት ይላካሉ እና ምላሾች እዚህ ይታያሉ</div>
-        </div>
+        <div class="chat-messages" id="chatMessages"></div>
         <div class="chat-input-area">
           <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter') sendMessage()">
           <button class="chat-send-btn" onclick="sendMessage()">Send</button>
