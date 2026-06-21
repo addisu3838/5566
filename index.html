@@ -53,7 +53,7 @@
       min-height: 100vh;
     }
 
-    /* ===== Summary Card - Only in Income Tab ===== */
+    /* ===== Income Summary - Only in Income Tab ===== */
     #incomeSummaryRow {
       display: block;
     }
@@ -102,34 +102,33 @@
     .stat-val.green { color: var(--emerald); }
     .stat-val.red { color: var(--rose); }
 
-    /* ===== Floating Tabs ===== */
+    /* ===== Tabs like Telegram ===== */
     .floating-tabs {
       position: fixed;
-      bottom: 14px;
+      bottom: 0;
       left: 0;
       right: 0;
       display: flex;
       justify-content: center;
       z-index: 1000;
-      padding: 0 12px;
+      background: rgba(12, 13, 17, 0.92);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-top: 1px solid var(--gold-border);
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+      box-shadow: 0 -4px 30px rgba(0,0,0,0.5);
     }
     .tabs-inner {
       display: flex;
-      gap: 3px;
+      gap: 2px;
       align-items: center;
-      background: rgba(20, 22, 28, 0.85);
-      border: 1px solid var(--gold-border);
-      border-radius: 40px;
-      padding: 6px;
-      backdrop-filter: blur(28px) saturate(160%);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      max-width: 100%;
-      overflow-x: auto;
+      width: 100%;
+      max-width: 560px;
+      justify-content: space-around;
     }
     .tab-btn {
-      padding: 9px 13px;
+      padding: 8px 12px;
       border-radius: 32px;
-      font-size: 12.5px;
+      font-size: 11px;
       font-weight: 600;
       border: none;
       background: transparent;
@@ -138,11 +137,25 @@
       transition: all 0.22s cubic-bezier(.4,0,.2,1);
       letter-spacing: -0.1px;
       white-space: nowrap;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      min-width: 56px;
+    }
+    .tab-btn .tab-icon {
+      font-size: 20px;
+    }
+    .tab-btn .tab-label {
+      font-size: 9px;
+      opacity: 0.8;
     }
     .tab-btn.active {
-      background: linear-gradient(135deg, var(--gold), #b6904f);
-      color: var(--tg-button-text);
-      box-shadow: 0 2px 10px rgba(201,163,94,0.35);
+      color: var(--gold);
+    }
+    .tab-btn.active .tab-label {
+      color: var(--gold);
+      opacity: 1;
     }
 
     .tab-panel { display: none; }
@@ -549,7 +562,7 @@
     }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; }
 
-    /* ===== Splash ===== */
+    /* ===== Splash - Single Photo ===== */
     #splashSlideshow {
       position: fixed;
       top: 0;
@@ -697,10 +710,10 @@
   </style>
 </head>
 <body>
-  <!-- FULLSCREEN SPLASH SLIDESHOW -->
+  <!-- FULLSCREEN SPLASH - SINGLE PHOTO -->
   <div id="splashSlideshow">
     <img id="splashImg" src="index.png" alt="Chacha Dam">
-    <div class="splash-caption" id="splashCaption">Main dam overview</div>
+    <div class="splash-caption" id="splashCaption">🌊 Chacha Dam</div>
     <div class="splash-timer" id="splashTimer">2s</div>
   </div>
 
@@ -850,14 +863,29 @@
   </div>
 </div>
 
-<!-- Floating Tabs -->
+<!-- Floating Tabs - Like Telegram -->
 <div class="floating-tabs">
   <div class="tabs-inner">
-    <button class="tab-btn active" id="nav-income" onclick="switchTab('income')">💰 Income</button>
-    <button class="tab-btn" id="nav-cost" onclick="switchTab('cost')">📊 Cost</button>
-    <button class="tab-btn" id="nav-percent" onclick="switchTab('percent')">%</button>
-    <button class="tab-btn" id="nav-photos" onclick="switchTab('photos')">📸 Photos</button>
-    <button class="tab-btn" id="nav-chat" onclick="switchTab('chat')">💬 Chat</button>
+    <button class="tab-btn active" id="nav-income" onclick="switchTab('income')">
+      <span class="tab-icon">💰</span>
+      <span class="tab-label">Income</span>
+    </button>
+    <button class="tab-btn" id="nav-cost" onclick="switchTab('cost')">
+      <span class="tab-icon">📊</span>
+      <span class="tab-label">Cost</span>
+    </button>
+    <button class="tab-btn" id="nav-percent" onclick="switchTab('percent')">
+      <span class="tab-icon">%</span>
+      <span class="tab-label">Percent</span>
+    </button>
+    <button class="tab-btn" id="nav-photos" onclick="switchTab('photos')">
+      <span class="tab-icon">📸</span>
+      <span class="tab-label">Photos</span>
+    </button>
+    <button class="tab-btn" id="nav-chat" onclick="switchTab('chat')">
+      <span class="tab-icon">💬</span>
+      <span class="tab-label">Chat</span>
+    </button>
   </div>
 </div>
 
@@ -868,10 +896,10 @@
 
 <script>
   // ============================================================
-  // 🔑 ቴሌግራም ቦት ማዋቀር - አዲስ ቶከን
+  // 🔑 ቴሌግራም ቦት ማዋቀር
   // ============================================================
-  const BOT_TOKEN = "8842064875:AAHbNPMeN_kVhO8YDepp72ljN2gygS3vA9k";
-  const CHAT_ID = "8842064875";
+  const BOT_TOKEN = "8895354569:AAG0sZujee-KBCdetnH_1APR-3wJVRs8_8g";
+  const CHAT_ID = "1380255277";
 
   // ============================================================
   // ሌሎች ማዋቀሮች
@@ -956,9 +984,6 @@
   let totalIncome = 0;
   bills.forEach(b => b.items.forEach(i => { if (i.inc) totalIncome += i.inc; }));
 
-  // ============================================================
-  // 📊 የገቢ ማሳያ ማዘመን
-  // ============================================================
   function updateSummaryDisplay() {
     document.getElementById('totalIncomeDisplay').textContent = fmt(totalIncome) + ' ETB';
   }
@@ -1038,9 +1063,6 @@
     }
   }
 
-  // ============================================================
-  // 💬 የቦት መልእክት ወደ ቻት ማከል
-  // ============================================================
   function addBotMessageToChat(text) {
     const messagesDiv = document.getElementById('chatMessages');
     if (!messagesDiv) return;
@@ -1115,9 +1137,6 @@
     }, 800);
   };
 
-  // ============================================================
-  // 💾 መልእክቶችን በLocalStorage ማስቀመጥ
-  // ============================================================
   function saveMessages() {
     const messagesDiv = document.getElementById('chatMessages');
     if (messagesDiv) {
@@ -1368,7 +1387,6 @@
     document.getElementById(`panel-${tab}`)?.classList.add('active');
     document.getElementById(`nav-${tab}`)?.classList.add('active');
 
-    // Show/hide income summary based on tab
     const incomeSummary = document.getElementById('incomeSummaryRow');
     if (tab === 'income') {
       incomeSummary.style.display = 'block';
@@ -1398,7 +1416,7 @@
   }
 
   // ============================================================
-  // 🚀 ስፕላሽ ስላይድሾው
+  // 🚀 ስፕላሽ - አንድ ፎቶ ለ2 ሰከንድ
   // ============================================================
   function startSplashSlideshow() {
     const splash = document.getElementById('splashSlideshow');
@@ -1407,15 +1425,12 @@
     const splashTimer = document.getElementById('splashTimer');
     if (!splash || !splashImg || !splashCap || !splashTimer) return;
     
-    const splashPhotos = projectPhotos.slice(0, 2);
-    let splashIndex = 0;
-    let secondsLeft = 2;
-    
-    splashImg.src = splashPhotos[0].url;
-    splashCap.textContent = splashPhotos[0].caption;
+    splashImg.src = "index.png";
+    splashCap.textContent = "🌊 Chacha Dam";
     splashTimer.textContent = '2s';
     splashImg.onerror = () => { splashImg.src = 'https://placehold.co/800x600?text=Chacha+Dam'; };
 
+    let secondsLeft = 2;
     const timerInterval = setInterval(() => {
       secondsLeft--;
       if (secondsLeft > 0) {
@@ -1423,25 +1438,11 @@
       }
     }, 1000);
 
-    const photoInterval = setInterval(() => {
-      splashIndex = (splashIndex + 1) % splashPhotos.length;
-      splashImg.style.opacity = '0.5';
-      setTimeout(() => {
-        splashImg.src = splashPhotos[splashIndex].url;
-        splashCap.textContent = splashPhotos[splashIndex].caption;
-        splashImg.onerror = () => { splashImg.src = 'https://placehold.co/800x600?text=Chacha+Dam'; };
-        splashImg.style.opacity = '1';
-      }, 200);
-      secondsLeft = 2;
-      splashTimer.textContent = '2s';
-    }, 2000);
-
     setTimeout(() => {
-      clearInterval(photoInterval);
       clearInterval(timerInterval);
       splash.classList.add('hidden');
       switchTab('income');
-    }, 4000);
+    }, 2000);
   }
 
   // ============================================================
