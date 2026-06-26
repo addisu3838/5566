@@ -181,14 +181,14 @@
     .income-subtabs {
       display: flex;
       justify-content: center;
-      gap: 8px;
+      gap: 18px;
       padding: 4px 16px 16px;
     }
     .income-subtab-btn {
       flex: 0 1 auto;
-      padding: 8px 18px;
+      padding: 12px 18px;
       border-radius: 999px;
-      font-size: 12px;
+      font-size: 16px;
       font-weight: 700;
       letter-spacing: 0.1px;
       border: 1px solid var(--border-subtle);
@@ -200,6 +200,10 @@
       align-items: center;
       justify-content: center;
       gap: 5px;
+      font-style: italic;
+      background-color: rgb(225, 231, 213);
+  
+      
     }
     .income-subtab-btn .subtab-icon { font-size: 13px; }
     .income-subtab-btn.active {
@@ -207,6 +211,7 @@
       border-color: var(--gold-border);
       color: var(--gold);
       box-shadow: 0 4px 14px rgba(201,163,94,0.12);
+      background-color: var(--emerald);
     }
 
     /* ===== Bill Cards (Income) ===== */
@@ -601,6 +606,67 @@
       cursor: pointer;
       font-size: 13.5px;
     }
+    .chat-photo-btn {
+      background: var(--gold-soft);
+      border: 1px solid var(--gold-border);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.18s, transform 0.12s;
+    }
+    .chat-photo-btn:active { background: var(--gold-border); transform: scale(0.92); }
+
+    /* ===== Chat Photos Modal ===== */
+    .chat-photos-modal {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-height: 70vh;
+      background: var(--tg-secondary-bg);
+      border-top: 1px solid var(--gold-border);
+      border-radius: 24px 24px 0 0;
+      z-index: 1050;
+      overflow-y: auto;
+      box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
+      animation: slideUp 0.28s cubic-bezier(.4,0,.2,1);
+    }
+    .chat-photos-modal.open { display: block; }
+    @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .chat-photos-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px 12px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gold);
+      position: sticky;
+      top: 0;
+      background: var(--tg-secondary-bg);
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 1;
+    }
+    .chat-photos-close {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--border-subtle);
+      color: var(--tg-text);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .chat-note {
       font-size: 10px;
       color: var(--tg-hint);
@@ -757,6 +823,121 @@
 
     ::-webkit-scrollbar { width: 4px; height: 4px; }
     ::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 4px; }
+
+    /* ===== E-cost Expense Table ===== */
+    .ecost-section {
+      padding: 16px 16px 32px;
+    }
+    .ecost-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      padding: 0 2px;
+    }
+    .ecost-table-wrap {
+      overflow-x: auto;
+      border-radius: var(--border-radius-lg);
+      border: 1px solid var(--gold-border);
+      box-shadow: var(--shadow-soft);
+    }
+    .ecost-table {
+      width: 100%;
+      min-width: 560px;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      background: var(--tg-card-bg);
+    }
+    .ecost-table thead tr {
+      background: linear-gradient(135deg, #1f2330, #15171f);
+      border-bottom: 1px solid var(--gold-border);
+    }
+    .ecost-table thead th {
+      padding: 13px 14px;
+      text-align: left;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .ecost-table thead th:not(:first-child) { text-align: right; }
+    .ecost-table tbody tr {
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background 0.15s;
+    }
+    .ecost-table tbody tr:hover { background: rgba(201,163,94,0.05); }
+    .ecost-table tbody tr:last-child { border-bottom: none; }
+    .ecost-table td {
+      padding: 11px 14px;
+      color: var(--tg-text);
+      vertical-align: middle;
+      line-height: 1.4;
+    }
+    .ecost-table td.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+      color: var(--emerald);
+      white-space: nowrap;
+    }
+    .ecost-table td.num.zero { color: var(--tg-hint); font-weight: 400; }
+    .ecost-table td.num.highlight { color: var(--gold); font-size: 13px; }
+    .ecost-table .total-row td { background: rgba(201,163,94,0.06); }
+    .ecost-table tfoot .grand-total-row td {
+      background: linear-gradient(135deg, #1f2330, #15171f);
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 14px;
+      border-top: 1px solid var(--gold-border);
+    }
+    .ecost-table tfoot .grand-total-row td.num { text-align: right; color: var(--gold); }
+
+    /* Grand Total Card */
+    .ecost-grand-card {
+      background: linear-gradient(135deg, #1f2330, #15171f);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--border-radius-lg);
+      padding: 18px 22px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-soft);
+    }
+    .ecost-grand-label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .ecost-grand-val {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--emerald);
+      font-variant-numeric: tabular-nums;
+    }
+    .ecost-income-card {
+      border-color: rgba(78,203,135,0.35);
+      background: linear-gradient(135deg, #182b22, #111a16);
+    }
+    .ecost-income-val {
+      color: var(--gold) !important;
+    }
+    .ecost-table td.row-num {
+      text-align: center;
+      color: var(--tg-hint);
+      font-size: 11px;
+      width: 28px;
+      padding: 11px 6px;
+    }
+    .ecost-table th:first-child { text-align: center; width: 28px; }
+    .ecost-table td.running { color: var(--gold) !important; font-size: 12px; }
   </style>
 </head>
 <body>
@@ -932,20 +1113,96 @@
         <div class="sub" style="margin-top: 8px;">ከታቀደው የጊዜ ሰሌዳ አንጻር ያለው ሂደት</div>
       </div>
 
+      <!-- Monthly table hidden but IDs kept for JS -->
+      <table style="display:none;">
+        <tbody id="monthlyTableBody"></tbody>
+        <tfoot>
+          <tr><td id="monthlyTotalIncome"></td><td id="monthlyTotalExpense"></td><td id="monthlyTotalBalance"></td></tr>
+        </tfoot>
+      </table>
+
+      <!-- Line Graph -->
+      <div class="percent-card">
+        <h3>📈 Income vs Expense — Line Graph</h3>
+        <canvas id="monthlyLineChart" style="width:100%;margin-top:10px;"></canvas>
+        <div style="display:flex;gap:18px;justify-content:center;margin-top:14px;">
+          <span style="font-size:11px;color:var(--emerald);display:flex;align-items:center;gap:5px;"><span style="display:inline-block;width:20px;height:3px;background:var(--emerald);border-radius:2px;"></span>Income</span>
+          <span style="font-size:11px;color:var(--rose);display:flex;align-items:center;gap:5px;"><span style="display:inline-block;width:20px;height:3px;background:var(--rose);border-radius:2px;"></span>Expense</span>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <div id="panel-photos" class="tab-panel">
-    <div class="photos-section-title">📸 Project Gallery</div>
-    <div class="photos-subtitle">Slideshow + tap to enlarge</div>
-    <div id="slideshowContainer" class="slideshow-overlay">
-      <img id="slideshowImg" src="index.png" alt="Slideshow">
-      <div id="slideshowCaption" class="slideshow-caption">Main dam overview</div>
+    <!-- Expense Table -->
+    <div class="ecost-section">
+      <div class="ecost-title">💸 Overhead / Other Expenses</div>
+      <!-- Grand Total Card - ከላይ -->
+      <div class="ecost-grand-card">
+        <div class="ecost-grand-label">Grand Total</div>
+        <div class="ecost-grand-val" id="ecostGrandTotal">56,569,707.51 ETB</div>
+      </div>
+      <!-- Grand Total Income (Machinery Cost ድምር) -->
+      <div class="ecost-grand-card ecost-income-card" onclick="goToMachinery()" style="cursor:pointer;transition:opacity 0.15s;" onmousedown="this.style.opacity='0.75'" onmouseup="this.style.opacity='1'">
+        <div class="ecost-grand-label">🏗️ Grand Total Income<br><span style="font-size:10px;font-weight:500;color:var(--tg-hint);letter-spacing:0">Machinery Cost ↗</span></div>
+        <div class="ecost-grand-val ecost-income-val">130,061,474.71 ETB</div>
+      </div>
+      <div class="ecost-table-wrap">
+        <table class="ecost-table" id="ecostTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Description</th>
+              <th>Amount (ETB)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="row-num">1</td><td>Spare Part Expense – Ajima Chacha Irrigation Lot 3</td><td class="num">23,727,540.32</td></tr>
+            <tr><td class="row-num">2</td><td>Tyre &amp; Inner Tube Maintenance</td><td class="num">1,877,257.00</td></tr>
+            <tr><td class="row-num">3</td><td>Fuel &amp; Lubricants Expense – Ajima Chacha Irrigation Lot 3</td><td class="num">800.00</td></tr>
+            <tr><td class="row-num">4</td><td>Mobile Card Expense</td><td class="num">273,723.16</td></tr>
+            <tr><td class="row-num">5</td><td>Car Guard</td><td class="num">60,100.00</td></tr>
+            <tr><td class="row-num">6</td><td>Local Construction Material (Sand, Gravel, Stone, Tree &amp; Lot 3)</td><td class="num">192,036.43</td></tr>
+            <tr><td class="row-num">7</td><td>Camping Generator Fuel &amp; Lubricants Expense</td><td class="num">6,217,698.53</td></tr>
+            <tr><td class="row-num">8</td><td>Over Time</td><td class="num zero">—</td></tr>
+            <tr><td class="row-num">9</td><td>Calibration of Total Station</td><td class="num">100,096.63</td></tr>
+            <tr><td class="row-num">10</td><td>Medical Expense</td><td class="num">82,479.27</td></tr>
+            <tr><td class="row-num">11</td><td>Other Cost (Qret)</td><td class="num">27,955.00</td></tr>
+            <tr><td class="row-num">12</td><td>Cement Expense Lot-3</td><td class="num zero">—</td></tr>
+            <tr><td class="row-num">13</td><td>Test Cost</td><td class="num">82,317.90</td></tr>
+            <tr><td class="row-num">14</td><td>Service Cost</td><td class="num zero">—</td></tr>
+            <tr><td class="row-num">15</td><td>Fuel for Welding</td><td class="num">28,713.10</td></tr>
+            <tr><td class="row-num">16</td><td>For Mestengdo</td><td class="num">75,806.40</td></tr>
+            <tr><td class="row-num">17</td><td>Travel Expense and Other</td><td class="num">3,551,796.85</td></tr>
+            <tr><td class="row-num">18</td><td>DL for Green Legacy</td><td class="num">4,200.00</td></tr>
+            <tr><td class="row-num">19</td><td>Uniform and Clothing Expense – Ajima Chacha Irri Lot 3</td><td class="num">16,973.00</td></tr>
+            <tr><td class="row-num">20</td><td>Medical Expense (2)</td><td class="num">149,235.35</td></tr>
+            <tr><td class="row-num">21</td><td>Rent Cost of House, Storage Area, etc.</td><td class="num">308,500.00</td></tr>
+            <tr><td class="row-num">22</td><td>Transport Cost for Machinery (Low-Bed)</td><td class="num">120,000.00</td></tr>
+            <tr><td class="row-num">23</td><td>Other Costs – Irrigation Project AJIMA CHACHA LOT-03</td><td class="num">312,222.38</td></tr>
+            <tr><td class="row-num">24</td><td>Grease</td><td class="num">6,990.00</td></tr>
+            <tr><td class="row-num">25</td><td>Camp Maintenance (Timber, Poles, Nails, Chipwood, Purlin, etc.)</td><td class="num">121,541.44</td></tr>
+            <tr><td class="row-num">26</td><td>Office Desktop and Laptop</td><td class="num">305,798.17</td></tr>
+            <tr><td class="row-num">27</td><td>Benzine, Flasher, Brake Fluid, Transmission, Gear Oil, Grease, Coolant, ATF</td><td class="num">5,726,696.73</td></tr>
+            <tr><td class="row-num">28</td><td>Car Guard (2)</td><td class="num">35,950.00</td></tr>
+            <tr><td class="row-num">29</td><td>Machinery Maintenance</td><td class="num">60,940.00</td></tr>
+            <tr><td class="row-num">30</td><td>Tyre &amp; Inner Tube</td><td class="num">13,102,339.85</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="photos-grid" id="photosGrid"></div>
   </div>
 
   <div id="panel-chat" class="tab-panel">
+    <!-- Photos Modal (ሲነካ ይከፈታል) -->
+    <div id="chatPhotosModal" class="chat-photos-modal">
+      <div class="chat-photos-header">
+        <span>📸 Project Photos</span>
+        <button class="chat-photos-close" onclick="closeChatPhotos()">✕</button>
+      </div>
+      <div class="photos-grid" id="photosGrid"></div>
+    </div>
     <div id="chatWrapper"></div>
   </div>
 </div>
@@ -966,8 +1223,8 @@
       <span class="tab-label">Percentag</span>
     </button>
     <button class="tab-btn" id="nav-photos" onclick="switchTab('photos')">
-      <span class="tab-icon">📸</span>
-      <span class="tab-label">Photos</span>
+      <span class="tab-icon">🖼️</span>
+      <span class="tab-label">E-cost</span>
     </button>
     <button class="tab-btn" id="nav-chat" onclick="switchTab('chat')">
       <span class="tab-icon">💬</span>
@@ -1332,12 +1589,16 @@
   function renderCostContent() {
     const wrapper = document.getElementById('costContentWrapper');
     if (!wrapper) return;
+
+    // ድምሩን ከ arrays ያሰላ
+    const maps = { labour: labourItems, admin: adminItems, staff: staffItems, material: materialItems, machinery: machineryItems, overhead: overheadItems };
+    const computedTotal = Object.values(maps).reduce((sum, arr) => sum + arr.reduce((s, i) => s + i.amount, 0), 0);
     
     const totalCostHtml = `
       <div style="padding: 10px 16px 0;">
         <div class="stat-card" style="margin-bottom: 16px;">
           <div class="stat-label">📉 ጠቅላላ ወጪ</div>
-          <div class="stat-val red">${fmt(totalCostValue)} ETB</div>
+          <div class="stat-val red">${fmt(computedTotal)} ETB</div>
         </div>
       </div>
     `;
@@ -1345,19 +1606,181 @@
     const breakdownHtml = `<div class="cost-wrap"><div class="sec-title">💰 Detailed Cost Breakdown (ETB)</div>
       ${['labour','admin','staff','material','machinery','overhead'].map(t => `<div class="clickable-card" id="${t}Card"><div class="card-header" id="${t}Header"><div class="card-title"><div class="card-icon">${t==='labour'?'👥':t==='admin'?'🏢':t==='staff'?'🆔':t==='material'?'📦':t==='machinery'?'🏗️':'📊'}</div><div class="card-text"><h3>${t.charAt(0).toUpperCase()+t.slice(1)} Cost</h3><p id="${t}Total">—</p></div></div><span class="card-chevron" id="${t}Chevron">▼</span></div><div class="breakdown-list" id="${t}Breakdown"></div></div>`).join('')}</div>`;
     
-    wrapper.innerHTML = totalCostHtml + breakdownHtml;
+    wrapper.innerHTML = totalCostHtml + breakdownHtml + `
+      <div class="cost-wrap" id="costChartsSection">
+        <div class="sec-title">📊 Cost Breakdown Charts</div>
+
+        <!-- Line Chart -->
+        <div style="background:var(--tg-card-bg);border-radius:var(--border-radius-lg);border:1px solid var(--border-subtle);padding:18px 14px 14px;margin-bottom:24px;">
+          <div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:14px;letter-spacing:0.8px;text-transform:uppercase;">Line Graph — Cumulative Cost</div>
+          <canvas id="costLineChart" style="width:100%;max-height:240px;"></canvas>
+        </div>
+      </div>
+    `;
     
-    const maps = { labour: labourItems, admin: adminItems, staff: staffItems, material: materialItems, machinery: machineryItems, overhead: overheadItems };
-    for (let key of Object.keys(maps)) {
-      const total = maps[key].reduce((s, i) => s + i.amount, 0);
+    const mapsRef = maps;
+    for (let key of Object.keys(mapsRef)) {
+      const total = mapsRef[key].reduce((s, i) => s + i.amount, 0);
       const totalEl = document.getElementById(`${key}Total`);
       if (totalEl) totalEl.innerText = fmt(total) + ' ETB';
       const div = document.getElementById(`${key}Breakdown`);
-      if (div) div.innerHTML = maps[key].map(i => `<div class="breakdown-item"><span class="item-name">${i.name}</span><span class="item-amount">${fmt(i.amount)} ETB</span></div>`).join('');
+      if (div) div.innerHTML = mapsRef[key].map(i => `<div class="breakdown-item"><span class="item-name">${i.name}</span><span class="item-amount">${fmt(i.amount)} ETB</span></div>`).join('');
       const header = document.getElementById(`${key}Header`);
       const breakdown = document.getElementById(`${key}Breakdown`);
       const chevron = document.getElementById(`${key}Chevron`);
       if (header && breakdown && chevron) header.addEventListener('click', () => { breakdown.classList.toggle('open'); chevron.classList.toggle('open'); });
+    }
+    renderCostCharts();
+  }
+
+  function renderCostCharts() {
+    const categories = ['Labour','Admin','Staff','Material','Machinery','Overhead'];
+    const maps2 = { Labour: labourItems, Admin: adminItems, Staff: staffItems, Material: materialItems, Machinery: machineryItems, Overhead: overheadItems };
+    const values = categories.map(c => maps2[c].reduce((s,i) => s+i.amount, 0));
+    const colors = ['#4ecb87','#c9a35e','#6fb3e0','#a37fd1','#e0697a','#f0b84b'];
+    const maxVal = Math.max(...values);
+
+    // ===== BAR CHART =====
+    const barCanvas = document.getElementById('costBarChart');
+    if (barCanvas) {
+      const dpr = window.devicePixelRatio || 1;
+      const W = barCanvas.parentElement.clientWidth - 28;
+      const H = 260;
+      barCanvas.width = W * dpr;
+      barCanvas.height = H * dpr;
+      barCanvas.style.width = W + 'px';
+      barCanvas.style.height = H + 'px';
+      const ctx = barCanvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      const padL = 10, padR = 10, padT = 10, padB = 48;
+      const chartW = W - padL - padR;
+      const chartH = H - padT - padB;
+      const barGap = 10;
+      const barW = (chartW / categories.length) - barGap;
+
+      // Grid lines
+      const gridLines = 4;
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      ctx.lineWidth = 1;
+      for (let g = 0; g <= gridLines; g++) {
+        const y = padT + chartH - (g / gridLines) * chartH;
+        ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + chartW, y); ctx.stroke();
+      }
+
+      // Bars
+      values.forEach((val, i) => {
+        const x = padL + i * (barW + barGap) + barGap / 2;
+        const barH = (val / maxVal) * chartH;
+        const y = padT + chartH - barH;
+
+        // Gradient fill
+        const grad = ctx.createLinearGradient(0, y, 0, padT + chartH);
+        grad.addColorStop(0, colors[i]);
+        grad.addColorStop(1, colors[i] + '44');
+        ctx.fillStyle = grad;
+        const r = 6;
+        ctx.beginPath();
+        ctx.moveTo(x + r, y); ctx.lineTo(x + barW - r, y);
+        ctx.quadraticCurveTo(x + barW, y, x + barW, y + r);
+        ctx.lineTo(x + barW, padT + chartH);
+        ctx.lineTo(x, padT + chartH);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath(); ctx.fill();
+
+        // Value label on top
+        ctx.fillStyle = colors[i];
+        ctx.font = `bold ${dpr > 1 ? 9 : 10}px Inter, sans-serif`;
+        ctx.textAlign = 'center';
+        const label = val >= 1e9 ? (val/1e9).toFixed(1)+'B' : val >= 1e6 ? (val/1e6).toFixed(1)+'M' : (val/1e3).toFixed(0)+'K';
+        ctx.fillText(label, x + barW / 2, y - 4);
+
+        // Category label below
+        ctx.fillStyle = 'rgba(240,238,232,0.7)';
+        ctx.font = `${dpr > 1 ? 9 : 10}px Inter, sans-serif`;
+        ctx.fillText(categories[i], x + barW / 2, padT + chartH + 16);
+      });
+    }
+
+    // ===== LINE CHART =====
+    const lineCanvas = document.getElementById('costLineChart');
+    if (lineCanvas) {
+      const dpr = window.devicePixelRatio || 1;
+      const W = lineCanvas.parentElement.clientWidth - 28;
+      const H = 240;
+      lineCanvas.width = W * dpr;
+      lineCanvas.height = H * dpr;
+      lineCanvas.style.width = W + 'px';
+      lineCanvas.style.height = H + 'px';
+      const ctx = lineCanvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      const padL = 14, padR = 14, padT = 14, padB = 44;
+      const chartW = W - padL - padR;
+      const chartH = H - padT - padB;
+
+      // Cumulative values
+      const cumulative = [];
+      let running = 0;
+      values.forEach(v => { running += v; cumulative.push(running); });
+      const maxCum = cumulative[cumulative.length - 1];
+
+      const pts = cumulative.map((v, i) => ({
+        x: padL + (i / (categories.length - 1)) * chartW,
+        y: padT + chartH - (v / maxCum) * chartH
+      }));
+
+      // Grid lines
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      ctx.lineWidth = 1;
+      for (let g = 0; g <= 4; g++) {
+        const y = padT + (g / 4) * chartH;
+        ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + chartW, y); ctx.stroke();
+      }
+
+      // Area fill under line
+      ctx.beginPath();
+      ctx.moveTo(pts[0].x, padT + chartH);
+      pts.forEach(p => ctx.lineTo(p.x, p.y));
+      ctx.lineTo(pts[pts.length-1].x, padT + chartH);
+      ctx.closePath();
+      const areaGrad = ctx.createLinearGradient(0, padT, 0, padT + chartH);
+      areaGrad.addColorStop(0, 'rgba(201,163,94,0.28)');
+      areaGrad.addColorStop(1, 'rgba(201,163,94,0.02)');
+      ctx.fillStyle = areaGrad;
+      ctx.fill();
+
+      // Line
+      ctx.beginPath();
+      pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+      ctx.strokeStyle = '#c9a35e';
+      ctx.lineWidth = 2.5;
+      ctx.lineJoin = 'round';
+      ctx.stroke();
+
+      // Dots + labels
+      pts.forEach((p, i) => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#c9a35e';
+        ctx.fill();
+        ctx.strokeStyle = '#0c0d11';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Value above dot
+        ctx.fillStyle = '#c9a35e';
+        ctx.font = `bold 9px Inter, sans-serif`;
+        ctx.textAlign = 'center';
+        const lbl = cumulative[i] >= 1e9 ? (cumulative[i]/1e9).toFixed(2)+'B' : (cumulative[i]/1e6).toFixed(1)+'M';
+        ctx.fillText(lbl, p.x, p.y - 10);
+
+        // Category label below axis
+        ctx.fillStyle = 'rgba(240,238,232,0.7)';
+        ctx.font = `9px Inter, sans-serif`;
+        ctx.fillText(categories[i], p.x, padT + chartH + 16);
+      });
     }
   }
 
@@ -1396,6 +1819,7 @@
       <div class="chat-container">
         <div class="chat-messages" id="chatMessages"></div>
         <div class="chat-input-area">
+          <button class="chat-photo-btn" onclick="openChatPhotos()" title="View Project Photos">🖼️</button>
           <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter') sendMessage()">
           <button class="chat-send-btn" onclick="sendMessage()">Send</button>
         </div>
@@ -1403,6 +1827,111 @@
       </div>`;
     loadMessages();
     startLongPolling();
+  }
+
+  // ============================================================
+  // 📅 Monthly Income vs Expense Data & Chart
+  // ============================================================
+  const monthlyData = [
+    { month: 'July',      income: 726279.2646,   expense: 10097003.56  },
+    { month: 'August',    income: 567011.5098,   expense: 6000193.878  },
+    { month: 'September', income: 1388741.851,   expense: 8763540.917  },
+    { month: 'October',   income: 34541056.64,   expense: 53725676.05  },
+    { month: 'November',  income: 16330215.74,   expense: 35406456.29  },
+    { month: 'December',  income: 19059570.99,   expense: 41050565.28  },
+    { month: 'January',   income: 15842439.74,   expense: 45475431.15  },
+    { month: 'February',  income: 25209795.16,   expense: 50525816.93  },
+    { month: 'March',     income: 15014833.52,   expense: 21915903.66  },
+    { month: 'April',     income: 9096487.547,   expense: 17476147.71  },
+    { month: 'May',       income: 97302022.42,   expense: 107965369.4  },
+  ];
+
+  function renderMonthlySection() {
+    const fmtM = n => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const tbody = document.getElementById('monthlyTableBody');
+    if (!tbody) return;
+
+    let totalInc = 0, totalExp = 0;
+    tbody.innerHTML = '';
+    monthlyData.forEach(row => {
+      const bal = row.income - row.expense;
+      totalInc += row.income;
+      totalExp += row.expense;
+      const tr = document.createElement('tr');
+      tr.style.borderBottom = '1px solid var(--border-subtle)';
+      tr.innerHTML = `
+        <td style="padding:10px 14px;font-weight:500;">${row.month}</td>
+        <td style="padding:10px 14px;text-align:right;color:var(--emerald);font-variant-numeric:tabular-nums;">${fmtM(row.income)}</td>
+        <td style="padding:10px 14px;text-align:right;color:var(--rose);font-variant-numeric:tabular-nums;">${fmtM(row.expense)}</td>
+        <td style="padding:10px 14px;text-align:right;font-variant-numeric:tabular-nums;color:${bal >= 0 ? 'var(--emerald)' : 'var(--rose)'};font-weight:600;">${bal >= 0 ? '+' : ''}${fmtM(bal)}</td>`;
+      tbody.appendChild(tr);
+    });
+    const totalBal = totalInc - totalExp;
+    const ti = document.getElementById('monthlyTotalIncome');
+    const te = document.getElementById('monthlyTotalExpense');
+    const tb = document.getElementById('monthlyTotalBalance');
+    if (ti) ti.textContent = fmtM(totalInc);
+    if (te) te.textContent = fmtM(totalExp);
+    if (tb) { tb.textContent = (totalBal >= 0 ? '+' : '') + fmtM(totalBal); tb.style.color = totalBal >= 0 ? 'var(--emerald)' : 'var(--rose)'; }
+
+    // Draw line chart
+    const canvas = document.getElementById('monthlyLineChart');
+    if (!canvas) return;
+    const dpr = window.devicePixelRatio || 1;
+    const W = canvas.parentElement.clientWidth - 32;
+    const H = 220;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+
+    const padL = 12, padR = 12, padT = 20, padB = 36;
+    const cW = W - padL - padR;
+    const cH = H - padT - padB;
+    const n = monthlyData.length;
+    const allVals = monthlyData.flatMap(r => [r.income, r.expense]);
+    const maxV = Math.max(...allVals);
+
+    const xOf = i => padL + (i / (n - 1)) * cW;
+    const yOf = v => padT + cH - (v / maxV) * cH;
+
+    // Grid
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)'; ctx.lineWidth = 1;
+    for (let g = 0; g <= 4; g++) {
+      const y = padT + (g / 4) * cH;
+      ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + cW, y); ctx.stroke();
+    }
+
+    // Draw a line + area
+    const drawLine = (data, color, filled) => {
+      const pts = data.map((v, i) => ({ x: xOf(i), y: yOf(v) }));
+      if (filled) {
+        ctx.beginPath();
+        ctx.moveTo(pts[0].x, padT + cH);
+        pts.forEach(p => ctx.lineTo(p.x, p.y));
+        ctx.lineTo(pts[n-1].x, padT + cH);
+        ctx.closePath();
+        const g = ctx.createLinearGradient(0, padT, 0, padT + cH);
+        g.addColorStop(0, color + '33'); g.addColorStop(1, color + '05');
+        ctx.fillStyle = g; ctx.fill();
+      }
+      ctx.beginPath();
+      pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+      ctx.strokeStyle = color; ctx.lineWidth = 2.2; ctx.lineJoin = 'round'; ctx.stroke();
+      pts.forEach(p => {
+        ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = color; ctx.fill();
+        ctx.strokeStyle = '#0c0d11'; ctx.lineWidth = 1.5; ctx.stroke();
+      });
+    };
+
+    drawLine(monthlyData.map(r => r.expense), '#e0697a', true);
+    drawLine(monthlyData.map(r => r.income), '#4ecb87', true);
+
+    // Month labels
+    ctx.fillStyle = 'rgba(240,238,232,0.6)';
+    ctx.font = `9px Inter,sans-serif`; ctx.textAlign = 'center';
+    monthlyData.forEach((r, i) => ctx.fillText(r.month.slice(0,3), xOf(i), padT + cH + 16));
   }
 
   // ============================================================
@@ -1485,11 +2014,49 @@
       card.innerHTML = `<img src="${photo.url}" alt="${photo.caption}" loading="lazy" onerror="this.src='https://placehold.co/400x200?text=No+Image'"><div class="photo-caption">${photo.caption}</div>`;
       grid.appendChild(card);
     });
-    startSlideshow();
+  }
+
+  function computeRunningTotals() {
+    const table = document.getElementById('ecostTable');
+    if (!table) return;
+    const amountCells = table.querySelectorAll('tbody tr td:nth-child(3)');
+    const runningCells = table.querySelectorAll('tbody tr td.running');
+    let running = 0;
+    const fmt = n => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    amountCells.forEach((cell, i) => {
+      const raw = cell.textContent.replace(/,/g, '').trim();
+      const val = parseFloat(raw) || 0;
+      running += val;
+      if (runningCells[i]) runningCells[i].textContent = fmt(running);
+    });
+    const grandEl = document.getElementById('ecostGrandTotal');
+    if (grandEl) grandEl.textContent = fmt(running) + ' ETB';
+  }
+
+  function goToMachinery() {
+    switchTab('cost');
+    setTimeout(() => {
+      const machineryBreakdown = document.getElementById('machineryBreakdown');
+      const machineryChevron = document.getElementById('machineryChevron');
+      if (machineryBreakdown && !machineryBreakdown.classList.contains('open')) {
+        machineryBreakdown.classList.add('open');
+        if (machineryChevron) machineryChevron.classList.add('open');
+      }
+      const machineryCard = document.getElementById('machineryCard');
+      if (machineryCard) machineryCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 350);
   }
 
   function openLightbox(imgUrl) { const lb = document.getElementById('lightbox'), img = document.getElementById('lightboxImg'); if(lb && img) { img.src = imgUrl; lb.classList.add('active'); } }
   function closeLightbox() { document.getElementById('lightbox')?.classList.remove('active'); }
+
+  function openChatPhotos() {
+    renderPhotos();
+    document.getElementById('chatPhotosModal')?.classList.add('open');
+  }
+  function closeChatPhotos() {
+    document.getElementById('chatPhotosModal')?.classList.remove('open');
+  }
 
   // ============================================================
   // 🔄 ታቦችን መቀየር
@@ -1521,8 +2088,9 @@
     } else if (tab === 'percent') {
       stopSlideshow();
       stopLongPolling();
+      setTimeout(renderMonthlySection, 50);
     } else if (tab === 'photos') {
-      renderPhotos();
+      computeRunningTotals();
       stopLongPolling();
     } else if (tab === 'chat') {
       renderChatPanel();
