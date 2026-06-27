@@ -188,6 +188,33 @@
 
       .lightbox { background: rgba(240,238,232,0.97); }
 
+      /* ── ሁሉም ጽሑፎች ጥቁር ─────────────────────────── */
+      * { color: var(--tg-text); }
+
+      /* ── exceptions: colored accents stay as-is ─── */
+      .stat-val.green, .item-inc, .bill-total,
+      .ecost-income-card * { color: var(--emerald) !important; }
+
+      .stat-val.red, .rose { color: var(--rose) !important; }
+
+      .gold, .bill-name em, [style*="color:var(--gold)"],
+      .income-subtab-btn.active,
+      .tab-btn.active .tab-label { color: var(--gold) !important; }
+
+      .tg-hint, .item-ach, .photo-caption,
+      .chat-message-system { color: var(--tg-hint) !important; }
+
+      .item-pill { color: var(--gold) !important; }
+      .bill-chevron { color: var(--tg-hint) !important; }
+      .tab-btn .tab-label { color: var(--tg-hint); }
+      .tab-btn.active .tab-label { color: var(--gold); }
+
+      /* splash caption sits on dark overlay — keep white */
+      .slideshow-caption { color: #ffffff !important; }
+
+      /* blue accent (ወራት counter) — darken for light bg */
+      .percent-mini .num.blue { color: #2980b9 !important; }
+
       #splashSlideshow { background: #f5f3ee; }
       #splashSlideshow .splash-timer {
         background: rgba(250,248,244,0.85);
@@ -449,7 +476,7 @@
       font-size: 11.5px;
       line-height: 1.45;
       flex: 1;
-      color: #d8d6ce;
+      color: var(--tg-text);
     }
     .item-right {
       text-align: right;
