@@ -13,6 +13,7 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    /* ===== Dark Mode (default) ===== */
     :root {
       --tg-bg: #14161c;
       --tg-secondary-bg: #1c1f28;
@@ -22,7 +23,7 @@
       --tg-hint: #8b8a94;
       --tg-link: #c9a35e;
       --tg-button: #c9a35e;
-      --tg-button-text: #14161c;
+      --tg-button-text: #ffffff;
       --gold: #c9a35e;
       --gold-soft: rgba(201, 163, 94, 0.14);
       --gold-border: rgba(201, 163, 94, 0.28);
@@ -32,6 +33,167 @@
       --border-radius-lg: 20px;
       --border-radius-md: 14px;
       --shadow-soft: 0 8px 24px rgba(0,0,0,0.35);
+    }
+
+    /* ===== Light Mode ===== */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --tg-bg: #f5f3ee;
+        --tg-secondary-bg: #ede9e0;
+        --tg-section-bg: #faf8f4;
+        --tg-card-bg: #ffffff;
+        --tg-text: #1a1710;
+        --tg-hint: #7a7870;
+        --tg-link: #9a7030;
+        --tg-button: #9a7030;
+        --tg-button-text: #ffffff;
+        --gold: #9a7030;
+        --gold-soft: rgba(154, 112, 48, 0.10);
+        --gold-border: rgba(154, 112, 48, 0.28);
+        --emerald: #1a9458;
+        --rose: #bf3347;
+        --border-subtle: rgba(0, 0, 0, 0.08);
+        --shadow-soft: 0 4px 18px rgba(0,0,0,0.09);
+      }
+
+      body {
+        background:
+          radial-gradient(circle at 15% 0%, rgba(154,112,48,0.06), transparent 45%),
+          radial-gradient(circle at 85% 100%, rgba(154,112,48,0.04), transparent 50%),
+          var(--tg-section-bg);
+      }
+
+      .floating-tabs {
+        background: rgba(250, 248, 244, 0.95);
+        border-top-color: var(--gold-border);
+        box-shadow: 0 -2px 20px rgba(0,0,0,0.07);
+      }
+
+      .stat-card {
+        background: linear-gradient(155deg, #ffffff 0%, #f5f1e8 100%);
+      }
+      .stat-card::before { opacity: 0.35; }
+
+      .income-subtab-btn {
+        background: #f0ede6;
+        border-color: rgba(0,0,0,0.10);
+        color: var(--tg-hint);
+      }
+      .income-subtab-btn.active {
+        background: var(--gold-soft);
+        border-color: var(--gold-border);
+        color: var(--gold);
+      }
+
+      .bill-card {
+        background: #ffffff;
+        border-color: rgba(0,0,0,0.07);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      }
+      .bill-header { background: #ffffff; }
+      .bill-name { color: var(--tg-text); }
+      .bill-items {
+        background: #f7f4ee;
+        border-top-color: rgba(0,0,0,0.06);
+      }
+      .item-row { border-bottom-color: rgba(0,0,0,0.05); }
+      .item-desc { color: #3a3830; }
+
+      .clickable-card {
+        background: #ffffff;
+        border-color: rgba(0,0,0,0.07);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      }
+      .card-text h3 { color: var(--tg-text); }
+      .breakdown-list { background: #f7f4ee; }
+      .breakdown-item { border-bottom-color: rgba(0,0,0,0.05); }
+
+      .password-overlay {
+        background: linear-gradient(155deg, #ffffff 0%, #f5f1e8 100%);
+      }
+      .password-input {
+        background: #f0ede6;
+        color: var(--tg-text);
+        border-color: var(--gold-border);
+      }
+
+      .percent-card {
+        background: #ffffff;
+        border-color: rgba(0,0,0,0.07);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      }
+      .percent-card h3 { color: var(--tg-text); }
+      .percent-bar {
+        background: #e8e4db;
+        border-color: rgba(0,0,0,0.06);
+      }
+      .percent-mini {
+        background: #ffffff;
+        border-color: rgba(0,0,0,0.07);
+        box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+      }
+      .percent-mini .label { color: var(--tg-hint); }
+
+      .ecost-table { background: #ffffff; }
+      .ecost-table thead tr {
+        background: linear-gradient(135deg, #f5f1e8, #ede9df);
+      }
+      .ecost-table tbody tr:hover { background: rgba(154,112,48,0.04); }
+      .ecost-table tfoot .grand-total-row td {
+        background: linear-gradient(135deg, #f5f1e8, #ede9df);
+      }
+      .ecost-grand-card {
+        background: linear-gradient(135deg, #ffffff, #f5f1e8);
+      }
+      .ecost-income-card {
+        background: linear-gradient(135deg, #edfaf3, #ddf2e8);
+        border-color: rgba(26,148,88,0.3);
+      }
+
+      .chat-message-bot {
+        background: #f0ede6;
+        border-color: rgba(0,0,0,0.06);
+        color: var(--tg-text);
+      }
+      .chat-message-system {
+        background: #e8e4db;
+        color: var(--tg-hint);
+        border-color: rgba(0,0,0,0.05);
+      }
+      .chat-input-area {
+        background: #ffffff;
+        border-color: var(--gold-border);
+      }
+      .chat-input { color: var(--tg-text); }
+      .chat-input::placeholder { color: var(--tg-hint); }
+      .chat-photos-modal {
+        background: #faf8f4;
+        border-top-color: var(--gold-border);
+      }
+      .chat-photos-header {
+        background: #faf8f4;
+        border-bottom-color: rgba(0,0,0,0.06);
+        color: var(--gold);
+      }
+      .chat-photos-close {
+        background: rgba(0,0,0,0.05);
+        border-color: rgba(0,0,0,0.08);
+        color: var(--tg-text);
+      }
+      .photo-card {
+        background: #ffffff;
+        border-color: rgba(0,0,0,0.07);
+      }
+      .photo-caption { color: var(--tg-hint); }
+
+      .lightbox { background: rgba(240,238,232,0.97); }
+
+      #splashSlideshow { background: #f5f3ee; }
+      #splashSlideshow .splash-timer {
+        background: rgba(250,248,244,0.85);
+        border-color: var(--gold-border);
+        color: var(--gold);
+      }
     }
 
     body {
@@ -70,18 +232,18 @@
       padding: 18px 10px;
     }
     .summary-row.two-col .stat-label {
-      font-size: 13px;
+      font-size: 10px;
       letter-spacing: 0.4px;
       gap: 4px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .summary-row.two-col .stat-val {
-      font-size: 15px;
+      font-size: 13px;
     }
     .stat-card {
-      background: linear-gradient(155deg, #1f2330 0%, #15171f 100%);
+      background: linear-gradient(155deg, var(--tg-secondary-bg) 0%, var(--tg-bg) 100%);
       border-radius: var(--border-radius-lg);
-      padding: 22px 20px;
+      padding: 14px 16px;
       border: 1px solid var(--gold-border);
       text-align: center;
       box-shadow: var(--shadow-soft);
@@ -97,9 +259,9 @@
       opacity: 0.5;
     }
     .stat-label {
-      font-size: 16px;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 1.2px;
+      letter-spacing: 1.0px;
       text-transform: uppercase;
       color: var(--gold);
       margin-bottom: 10px;
@@ -109,7 +271,7 @@
       gap: 6px;
     }
     .stat-val {
-      font-size: 20px;
+      font-size: 15px;
       font-weight: 700;
       letter-spacing: -0.4px;
       font-variant-numeric: tabular-nums;
@@ -186,10 +348,10 @@
     }
     .income-subtab-btn {
       flex: 0 1 auto;
-      padding: 12px 18px;
+      padding: 8px 18px;
       border-radius: 999px;
-      font-size: 16px;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 600;
       letter-spacing: 0.1px;
       border: 1px solid var(--border-subtle);
       background: var(--tg-card-bg);
@@ -200,18 +362,13 @@
       align-items: center;
       justify-content: center;
       gap: 5px;
-      font-style: italic;
-      background-color: rgb(225, 231, 213);
-  
-      
     }
     .income-subtab-btn .subtab-icon { font-size: 13px; }
     .income-subtab-btn.active {
       background: var(--gold-soft);
       border-color: var(--gold-border);
       color: var(--gold);
-      box-shadow: 0 4px 14px rgba(201,163,94,0.12);
-      background-color: var(--emerald);
+      box-shadow: 0 4px 14px rgba(201,163,94,0.18);
     }
 
     /* ===== Bill Cards (Income) ===== */
@@ -223,7 +380,7 @@
       overflow: hidden;
     }
     .bill-header {
-      padding: 16px 18px;
+      padding: 12px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -235,25 +392,25 @@
       gap: 14px;
     }
     .bill-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 16px;
       background: var(--gold-soft);
       border: 1px solid var(--gold-border);
     }
     .bill-name {
-      font-size: 14.5px;
+      font-size: 12.5px;
       font-weight: 600;
       letter-spacing: -0.1px;
     }
     .bill-total {
-      font-size: 13px;
+      font-size: 11px;
       color: var(--emerald);
-      font-weight: 600;
+      font-weight: 700;
       margin-top: 3px;
       font-variant-numeric: tabular-nums;
     }
@@ -270,7 +427,7 @@
     }
     .bill-items.open { display: block; }
     .item-row {
-      padding: 13px 18px;
+      padding: 10px 14px;
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
       align-items: flex-start;
@@ -289,7 +446,7 @@
       font-family: 'SF Mono', monospace;
     }
     .item-desc {
-      font-size: 13px;
+      font-size: 11.5px;
       line-height: 1.45;
       flex: 1;
       color: #d8d6ce;
@@ -305,7 +462,7 @@
       font-weight: 500;
     }
     .item-inc {
-      font-size: 13.5px;
+      font-size: 11.5px;
       font-weight: 600;
       color: var(--emerald);
       font-variant-numeric: tabular-nums;
@@ -378,7 +535,7 @@
     .item-amount { font-weight: 600; color: var(--emerald); white-space: nowrap; font-variant-numeric: tabular-nums; }
 
     .password-overlay {
-      background: linear-gradient(155deg, #1f2330 0%, #15171f 100%);
+      background: linear-gradient(155deg, var(--tg-secondary-bg) 0%, var(--tg-bg) 100%);
       border-radius: var(--border-radius-lg);
       padding: 38px 24px;
       text-align: center;
@@ -445,7 +602,7 @@
       height: 150px;
       object-fit: cover;
       display: block;
-      background: #1a1d26;
+      background: var(--tg-card-bg);
     }
     .photo-caption {
       padding: 10px 8px;
@@ -683,7 +840,7 @@
       width: 100%;
       height: 100%;
       z-index: 9999;
-      background: #0c0d11;
+      background: var(--tg-section-bg);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -851,7 +1008,7 @@
       background: var(--tg-card-bg);
     }
     .ecost-table thead tr {
-      background: linear-gradient(135deg, #1f2330, #15171f);
+      background: linear-gradient(135deg, var(--tg-secondary-bg), var(--tg-bg));
       border-bottom: 1px solid var(--gold-border);
     }
     .ecost-table thead th {
@@ -888,7 +1045,7 @@
     .ecost-table td.num.highlight { color: var(--gold); font-size: 13px; }
     .ecost-table .total-row td { background: rgba(201,163,94,0.06); }
     .ecost-table tfoot .grand-total-row td {
-      background: linear-gradient(135deg, #1f2330, #15171f);
+      background: linear-gradient(135deg, var(--tg-secondary-bg), var(--tg-bg));
       color: var(--gold);
       font-weight: 700;
       font-size: 13px;
@@ -899,7 +1056,7 @@
 
     /* Grand Total Card */
     .ecost-grand-card {
-      background: linear-gradient(135deg, #1f2330, #15171f);
+      background: linear-gradient(135deg, var(--tg-secondary-bg), var(--tg-bg));
       border: 1px solid var(--gold-border);
       border-radius: var(--border-radius-lg);
       padding: 18px 22px;
@@ -924,7 +1081,7 @@
     }
     .ecost-income-card {
       border-color: rgba(78,203,135,0.35);
-      background: linear-gradient(135deg, #182b22, #111a16);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--emerald) 12%, var(--tg-bg)), var(--tg-bg));
     }
     .ecost-income-val {
       color: var(--gold) !important;
@@ -951,7 +1108,7 @@
 <div class="wrap">
   <!-- Income Summary - Only visible in Income Tab -->
   <div id="incomeSummaryRow">
-    <div class="summary-row two-col">
+    <div class="summary-row two-col" style="padding:12px 16px 10px;">
       <div class="stat-card" id="siteWorkSummaryCard">
         <div class="stat-label">🏗️ Site Work</div>
         <div class="stat-val green" id="siteWorkIncomeDisplay">0 ETB</div>
@@ -1351,8 +1508,10 @@
   });
 
   function updateSummaryDisplay() {
+    const totalEl = document.getElementById('totalIncomeDisplay');
     const siteEl = document.getElementById('siteWorkIncomeDisplay');
     const contractEl = document.getElementById('contractIncomeDisplay');
+    if (totalEl) totalEl.textContent = fmt(totalIncome) + ' ETB';
     if (siteEl) siteEl.textContent = fmt(siteWorkIncome) + ' ETB';
     if (contractEl) contractEl.textContent = fmt(contractIncome) + ' ETB';
   }
@@ -1564,21 +1723,46 @@
     const container = document.getElementById('billsContainer');
     if(!container) return;
     container.innerHTML = '';
+
     const filteredBills = bills.filter(b => CONTRACT_BILL_IDS.includes(b.id) === (incomeSubTab === 'contract'));
     if (filteredBills.length === 0) {
-      container.innerHTML = '<div style="text-align:center; padding: 30px 10px; color: var(--tg-hint); font-size: 13px;">No bills in this section yet.</div>';
+      container.innerHTML = '<div style="text-align:center;padding:40px 10px;color:var(--tg-hint);font-size:13px;">No bills in this section yet.</div>';
       return;
     }
+
     filteredBills.forEach((bill, idx) => {
       let billTotal = 0;
       bill.items.forEach(it => { if (it.inc) billTotal += it.inc; });
-      const card = document.createElement('div'); card.className = 'bill-card';
-      const itemsHtml = bill.items.map(it => `<div class="item-row"><span class="item-pill">${it.no || '—'}</span><span class="item-desc">${it.d}</span><div class="item-right"><div class="item-ach">${fmtA(it.ach)}</div><div class="item-inc">${it.inc ? fmt(it.inc) : '—'}</div></div></div>`).join('');
-      card.innerHTML = `<div class="bill-header" data-bill-idx="${idx}"><div class="bill-header-left"><div class="bill-icon">${bill.icon}</div><div><div class="bill-name">Bill ${bill.id} — ${bill.name}</div><div class="bill-total">${fmtM(billTotal)} ETB</div></div></div><span class="bill-chevron" id="chev-${idx}">▼</span></div><div class="bill-items" id="items-${idx}">${itemsHtml}</div>`;
+      const card = document.createElement('div');
+      card.className = 'bill-card';
+      const itemCount = bill.items.length;
+
+      const itemsHtml = bill.items.map(it =>
+        '<div class="item-row"><span class="item-pill">' + (it.no || '—') + '</span><span class="item-desc">' + it.d + '</span><div class="item-right"><div class="item-ach">Qty: ' + fmtA(it.ach) + '</div><div class="item-inc">' + (it.inc ? fmt(it.inc) + ' ETB' : '—') + '</div></div></div>'
+      ).join('');
+
+      card.innerHTML =
+        '<div class="bill-header" data-bill-idx="' + idx + '">' +
+          '<div class="bill-header-left">' +
+            '<div class="bill-icon">' + bill.icon + '</div>' +
+            '<div>' +
+              '<div class="bill-name">Bill ' + bill.id + ' — ' + bill.name + '</div>' +
+              '<div class="bill-total">' + fmt(billTotal) + ' ETB &nbsp;<span style="font-size:11px;color:var(--tg-hint);font-weight:400;">(' + itemCount + ' item' + (itemCount !== 1 ? 's' : '') + ')</span></div>' +
+            '</div>' +
+          '</div>' +
+          '<span class="bill-chevron" id="chev-' + idx + '">▼</span>' +
+        '</div>' +
+        '<div class="bill-items" id="items-' + idx + '">' +
+          '<div style="display:flex;justify-content:space-between;padding:8px 18px 4px;font-size:10.5px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--tg-hint);border-bottom:1px solid var(--border-subtle);">' +
+            '<span>Item No. / Description</span><span>Qty &nbsp;·&nbsp; Amount</span>' +
+          '</div>' +
+          itemsHtml +
+        '</div>';
+
       container.appendChild(card);
       const header = card.querySelector('.bill-header');
-      const itemsDiv = card.querySelector(`#items-${idx}`);
-      const chevron = card.querySelector(`#chev-${idx}`);
+      const itemsDiv = card.querySelector('#items-' + idx);
+      const chevron = card.querySelector('#chev-' + idx);
       header.addEventListener('click', () => { itemsDiv.classList.toggle('open'); chevron.classList.toggle('open'); });
     });
   }
@@ -1877,6 +2061,13 @@
     // Draw line chart
     const canvas = document.getElementById('monthlyLineChart');
     if (!canvas) return;
+    const isLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    const chartBg = isLight ? '#ffffff' : '#0c0d11';
+    const gridColor = isLight ? 'rgba(0,0,0,0.07)' : 'rgba(255,255,255,0.06)';
+    const labelColor = isLight ? 'rgba(0,0,0,0.45)' : 'rgba(240,238,232,0.6)';
+    const incomeColor = isLight ? '#1f9e5e' : '#4ecb87';
+    const expenseColor = isLight ? '#c0364a' : '#e0697a';
+
     const dpr = window.devicePixelRatio || 1;
     const W = canvas.parentElement.clientWidth - 32;
     const H = 220;
@@ -1896,7 +2087,7 @@
     const yOf = v => padT + cH - (v / maxV) * cH;
 
     // Grid
-    ctx.strokeStyle = 'rgba(255,255,255,0.06)'; ctx.lineWidth = 1;
+    ctx.strokeStyle = gridColor; ctx.lineWidth = 1;
     for (let g = 0; g <= 4; g++) {
       const y = padT + (g / 4) * cH;
       ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padL + cW, y); ctx.stroke();
@@ -1921,15 +2112,15 @@
       pts.forEach(p => {
         ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
         ctx.fillStyle = color; ctx.fill();
-        ctx.strokeStyle = '#0c0d11'; ctx.lineWidth = 1.5; ctx.stroke();
+        ctx.strokeStyle = chartBg; ctx.lineWidth = 1.5; ctx.stroke();
       });
     };
 
-    drawLine(monthlyData.map(r => r.expense), '#e0697a', true);
-    drawLine(monthlyData.map(r => r.income), '#4ecb87', true);
+    drawLine(monthlyData.map(r => r.expense), expenseColor, true);
+    drawLine(monthlyData.map(r => r.income), incomeColor, true);
 
     // Month labels
-    ctx.fillStyle = 'rgba(240,238,232,0.6)';
+    ctx.fillStyle = labelColor;
     ctx.font = `9px Inter,sans-serif`; ctx.textAlign = 'center';
     monthlyData.forEach((r, i) => ctx.fillText(r.month.slice(0,3), xOf(i), padT + cH + 16));
   }
